@@ -16,14 +16,17 @@ app.post('/message', async (req, res) => {
   const { message } = req.body;
   const encryptedMessage = CryptoJS.AES.encrypt(message, process.env.SECRET_KEY).toString();
   try {
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: message }],
     });
+    console.log("Response from OpenAI:", completion.choices);
 
-    const encryptedResponse = CryptoJS.AES.encrypt(response.data.choices[0].message.content, process.env.SECRET_KEY).toString();
+    const assistantResponseContent = completion.choices[0].message.content;
+    const encryptedResponse = CryptoJS.AES.encrypt(assistantResponseContent, process.env.SECRET_KEY).toString();
     res.json({ message: encryptedResponse });
   } catch (error) {
+    console.error("Error processing your request:", error); 
     res.status(500).send('Error processing your request');
   }
 });
