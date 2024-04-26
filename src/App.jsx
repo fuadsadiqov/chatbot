@@ -31,7 +31,7 @@ function App() {
                 body: JSON.stringify({ message: message })
             };
     
-            const response = await fetch('https://chatbot-ecru-ten-66.vercel.app/', requestOptions);
+            const response = await fetch('https://chatbot-psi-nine.vercel.app/message', requestOptions);
             const resultJson = await response.json();
             // const bytes = CryptoJS.AES.decrypt(resultJson.message, import.meta.env.VITE_SECRET_KEY);
             // const decryptedResponse = bytes.toString(CryptoJS.enc.Utf8);
@@ -67,7 +67,7 @@ function App() {
                                     <div>{result.message}</div>
                                 </div>
                                 <div className='response'>
-                                    <img width={38} height={35} src="/public/sefa.jpg" alt="" />
+                                    <img width={38} height={35} src="./public/sefa.jpg" alt="" />
                                     {result.response != false ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response }} /> : <div className='load-avatar'></div>}
                                 </div>
                             </div>
