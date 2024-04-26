@@ -2,28 +2,33 @@ const express = require('express');
 const CryptoJS = require('crypto-js');
 require('dotenv').config();
 const cors = require('cors');
-const { OpenAI } = require('openai');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY, 
-});
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
 
 app.post('/message', async (req, res) => {
   const { message } = req.body;
-  const encryptedMessage = CryptoJS.AES.encrypt(message, process.env.SECRET_KEY).toString();
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: message }],
-    });
-    console.log("Response from OpenAI:", completion.choices);
+  console.log("Received encrypted message:", message);
 
-    const assistantResponseContent = completion.choices[0].message.content;
-    const encryptedResponse = CryptoJS.AES.encrypt(assistantResponseContent, process.env.SECRET_KEY).toString();
+  try {
+    const bytes = CryptoJS.AES.decrypt(message, process.env.SECRET_KEY);
+    const decryptedRequest = bytes.toString(CryptoJS.enc.Utf8);
+    if (!decryptedRequest) {
+      throw new Error("Decryption failed. Possible encoding or key mismatch.");
+    }
+    console.log("Decrypted message:", decryptedRequest);
+    const model = genAI.getGenerativeModel({ model: "models/gemini-pro"});
+    const result = await model.generateContent(decryptedRequest);
+    const response = await result.response;
+    const text = await response.text();
+    console.log("Response from AI model:", text);
+
+    const encryptedResponse = CryptoJS.AES.encrypt(text, process.env.SECRET_KEY).toString();
     res.json({ message: encryptedResponse });
   } catch (error) {
     console.error("Error processing your request:", error); 
