@@ -1,12 +1,12 @@
-
-.App{
+.App {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   background-color: #131314;
 }
-.container{
+
+.container {
   width: 1200px;
   min-height: 100vh;
   display: flex;
@@ -16,20 +16,23 @@
   align-items: center;
   padding: 2rem 0;
 }
-.result{
+
+.result {
   width: 1000px;
   padding: 2rem;
   color: #fff;
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  overflow-y: auto;  
+  overflow-y: auto;
 }
-.result-text{
+
+.result-text {
   overflow-wrap: break-word;
 
 }
-.input{ 
+
+.input {
   width: 700px;
   height: 55px;
   padding: 0.5rem 1.3rem;
@@ -38,38 +41,70 @@
   outline: none;
   border: none;
   background-color: #1e1f20;
-  box-shadow: 0 25px 100px -12px rgb(0 0 0 / 0.54);
+  box-shadow: 0 25px 25px -12px rgb(0 0 0 / 0.54);
 }
-input:focus{
+
+input:focus {
   background-color: #282a2c;
 }
-.form{
+
+.form {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
   justify-content: center;
   position: fixed;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
 }
-.response, .request{
+
+.response,
+.request {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 }
-.response img{
+
+.response img {
   border-radius: 50%;
 }
-.avatar{
+.hello{
+  text-align: center;
+  color: transparent;
+  padding-top: 10rem;
+  font-size: 35px;
+  font-weight: 700;
+  background: 
+  linear-gradient(74deg, 
+  #4285f4 0, 
+  #9b72cb 9%, 
+  #d96570 20%, 
+  #d96570 24%, 
+  #9b72cb 35%, 
+  #4285f4 44%, 
+  #9b72cb 50%, 
+  #d96570 56%, 
+  #131314 100%);
+  background-size: 400% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.avatar {
   width: 35px;
   height: 35px;
   border-radius: 50%;
   background-color: #004a77;
 }
-.mes{
+
+.mes {
   display: flex;
   gap: 1rem;
   flex-direction: column;
 }
-.send-btn{
+
+.send-btn {
   background-color: transparent;
   border: none;
   position: absolute;
@@ -82,11 +117,22 @@ input:focus{
   animation: slideInFromRight 0.5s forwards;
 }
 
-.send-btn:hover{
+.response-avatar {
+  width: 38px;
+  height: 35px;
+}
+
+.response-avatar img {
+  width: 38px;
+  height: 35px;
+  object-fit: cover;
+}
+
+.send-btn:hover {
   background-color: #333333;
 }
 
-.load-avatar{
+.load-avatar {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -96,12 +142,13 @@ input:focus{
 
 @keyframes slideInFromRight {
   0% {
-      transform: translateX(100%);
-      opacity: 0;
+    transform: translateX(100%);
+    opacity: 0;
   }
+
   100% {
-      transform: translateX(0);
-      opacity: 1;
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 
@@ -109,9 +156,11 @@ input:focus{
   0% {
     transform: scale(0.5);
   }
+
   50% {
     transform: scale(1);
   }
+
   100% {
     transform: scale(0.5);
   }

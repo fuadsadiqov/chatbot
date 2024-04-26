@@ -19,39 +19,39 @@ function App() {
 
     const sendMessage = async () => {
         event.preventDefault();
-        setLoading(true);
-        setResults(prevState => [...prevState, { message: message, response: false }]);
-        setMessage('')
+        if (message) {
+            setLoading(true);
+            setResults(prevState => [...prevState, { message: message, response: null }]);
+            setMessage('')
 
-        try {
-            const encryptedMessage = CryptoJS.AES.encrypt(JSON.stringify({ message }), import.meta.env.VITE_SECRET_KEY).toString();
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: message })
-            };
+            try {
+                const encryptedMessage = CryptoJS.AES.encrypt(JSON.stringify({ message }), import.meta.env.VITE_SECRET_KEY).toString();
+                const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: encryptedMessage })
+                };
 
-            const response = await fetch('https://chatbot-psi-nine.vercel.app/message', requestOptions);
-            const resultJson = await response.json();
-            // const bytes = CryptoJS.AES.decrypt(resultJson.message, import.meta.env.VITE_SECRET_KEY);
-            // const decryptedResponse = bytes.toString(CryptoJS.enc.Utf8);
-
-            setResults(prevState => {
-                const newState = [...prevState];
-                newState[newState.length - 1] = { message: message, response: resultJson.message };
-                return newState;
-            });
-
-            setResponse(resultJson.message);
-            setLoading(false);
-        } catch (error) {
-            console.error('Error:', error);
-            setResponse('Error processing request');
-            setResults(prevState => {
-                const newState = [...prevState];
-                newState[newState.length - 1] = { message: message, response: 'Değerli hemkarım, çok özür dilerim. Yeniden gönder' };
-                return newState;
-            });
+                const response = await fetch('http://localhost:5000/message', requestOptions);
+                const resultJson = await response.json();
+                const bytes = CryptoJS.AES.decrypt(resultJson.message, import.meta.env.VITE_SECRET_KEY);
+                const decryptedResponse = bytes.toString(CryptoJS.enc.Utf8);
+                setResults(prevState => {
+                    const newState = [...prevState];
+                    newState[newState.length - 1] = { message: message, response: decryptedResponse };
+                    return newState;
+                });
+                setResponse(decryptedResponse);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error:', error);
+                setResponse('Error processing request');
+                setResults(prevState => {
+                    const newState = [...prevState];
+                    newState[newState.length - 1] = { message: message, response: 'Değerli hemkarım, çok özür dilerim. Yeniden dene' };
+                    return newState;
+                });
+            }
         }
     };
 
@@ -59,6 +59,7 @@ function App() {
         <div className="App">
             <div className='container'>
                 <div className="result">
+                    {!results.length && <div className='hello'>Salam əziz həmkarım. Nə lazımdır?</div>}
                     {results.length > 0 ? results.map((result, index) => (
                         <div key={index}>
                             <div className='mes'>
@@ -67,8 +68,10 @@ function App() {
                                     <div>{result.message}</div>
                                 </div>
                                 <div className='response'>
-                                    <img width={38} style={{ objectFit: 'cover' }} height={35} src="https://wcu.edu.az/uploads/images/img_60e6b8ef05077.jpg" alt="" />
-                                    {result.response != false ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response }} /> : <div className='load-avatar'></div>}
+                                    <div className='response-avatar'>
+                                        <img src="/public/sefa.jpg" alt="" />
+                                    </div>
+                                    {result.response != null ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response  }} /> : <div className='load-avatar'></div>}
                                 </div>
                             </div>
                         </div>
@@ -76,11 +79,12 @@ function App() {
                     <div ref={resultsEndRef} />
                 </div>
                 <form onSubmit={sendMessage} className='form'>
-                    <input className='input' placeholder='Write something' value={message}
+                    <input className='input' placeholder='Axtar...' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
                     {/* {message && (
-                            <img onClick={sendMessage} className='send-btn' src="https://chatbot-psi-nine.vercel.app/public/send.svg" width={20} alt="Send" />
-                        )} */}
+                        <img onClick={sendMessage} className='send-btn' src="https://chatbot-psi-nine.vercel.app/public/send.svg" width={20} alt="Send" />
+                    )} */}
+                    <p style={{ fontSize: '11px' }}>Bu proyekt Fuad Sadıqov və İlkin Rəfiyev tərəfindən Kriptoqrafiya fənni üçün hazırlanmışdır</p>
                 </form>
             </div>
         </div>
