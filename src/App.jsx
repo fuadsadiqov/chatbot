@@ -28,8 +28,11 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <p dangerouslySetInnerHTML={{ __html: response }}></p>
+      <div className='container'>
+        <div className="result">
+          {<p>Hello</p>}
+          <p dangerouslySetInnerHTML={{ __html: response }}></p>
+        </div>
         <form onSubmit={sendMessage} className='form'>
           <input className='input' value={message} onChange={(e) => setMessage(e.target.value)} />
           <button type='submit'>Send</button>
