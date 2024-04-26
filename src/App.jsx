@@ -67,7 +67,7 @@ function App() {
                                     <div>{result.message}</div>
                                 </div>
                                 <div className='response'>
-                                    <img width={38} height={35} src="./public/sefa.jpg" alt="" />
+                                    <img width={38} height={35} src="https://chatbot-psi-nine.vercel.app/public/sefa.jpg" alt="" />
                                     {result.response != false ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response }} /> : <div className='load-avatar'></div>}
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ function App() {
                     <input className='input' placeholder='Write something' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
                         {message && (
-                            <img onClick={sendMessage} className='send-btn' src="/public/send.svg" width={20} alt="Send" />
+                            <img onClick={sendMessage} className='send-btn' src="https://chatbot-psi-nine.vercel.app/public/send.svg" width={20} alt="Send" />
                         )}
                 </form>
             </div>
