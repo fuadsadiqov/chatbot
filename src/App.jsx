@@ -73,7 +73,7 @@ function App() {
                                 </div>
                                 <div className='response'>
                                     <div className='response-avatar'>
-                                        <Image src={ getImgUrl('/assets/sefa.jpg') }></Image>
+                                        <img src={ getImgUrl('/assets/sefa.jpg') }/>
                                     </div>
                                     {result.response != null ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response  }} /> : <div className='load-avatar'></div>}
                                 </div>
@@ -86,7 +86,7 @@ function App() {
                     <input className='input' placeholder='Axtar...' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
                     {message && (
-                        <Image w="20px" src={ getImgUrl('/assets/send.svg') }></Image>
+                        <img w="20px" src={ getImgUrl('/assets/send.svg') } />
                     )}
                     <p style={{ fontSize: '11px' }}>Bu proyekt Fuad Sadıqov və İlkin Rəfiyev tərəfindən Kriptoqrafiya fənni üçün hazırlanmışdır</p>
                 </form>
