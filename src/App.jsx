@@ -69,7 +69,7 @@ function App() {
                                 </div>
                                 <div className='response'>
                                     <div className='response-avatar'>
-                                        <img src="/public/sefa.jpg" alt="" />
+                                        <img src="./assets/sefa.jpg" alt="" />
                                     </div>
                                     {result.response != null ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response  }} /> : <div className='load-avatar'></div>}
                                 </div>
@@ -81,9 +81,9 @@ function App() {
                 <form onSubmit={sendMessage} className='form'>
                     <input className='input' placeholder='Axtar...' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
-                    {/* {message && (
-                        <img onClick={sendMessage} className='send-btn' src="https://chatbot-psi-nine.vercel.app/public/send.svg" width={20} alt="Send" />
-                    )} */}
+                    {message && (
+                        <img onClick={sendMessage} className='send-btn' src="./assets/send.svg" width={20} alt="" />
+                    )}
                     <p style={{ fontSize: '11px' }}>Bu proyekt Fuad Sadıqov və İlkin Rəfiyev tərəfindən Kriptoqrafiya fənni üçün hazırlanmışdır</p>
                 </form>
             </div>
