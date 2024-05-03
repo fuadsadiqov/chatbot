@@ -32,7 +32,7 @@ function App() {
                     body: JSON.stringify({ message: encryptedMessage })
                 };
 
-                const response = await fetch('http://localhost:5000/message', requestOptions);
+                const response = await fetch('https://chatbot-nodejs-zz1a.onrender.com/message', requestOptions);
                 const resultJson = await response.json();
                 const bytes = CryptoJS.AES.decrypt(resultJson.message, import.meta.env.VITE_SECRET_KEY);
                 const decryptedResponse = bytes.toString(CryptoJS.enc.Utf8);
