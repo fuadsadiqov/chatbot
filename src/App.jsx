@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import CryptoJS from 'crypto-js';
 import './App.css'
+import IMAGES from './IMAGES'
 
 function App() {
     const [message, setMessage] = useState('');
@@ -73,7 +74,7 @@ function App() {
                                 </div>
                                 <div className='response'>
                                     <div className='response-avatar'>
-                                        <img src={ getImgUrl('/assets/sefa.jpg') }/>
+                                        <img src={IMAGES.sefa}/>
                                     </div>
                                     {result.response != null ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response  }} /> : <div className='load-avatar'></div>}
                                 </div>
@@ -86,7 +87,7 @@ function App() {
                     <input className='input' placeholder='Axtar...' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
                     {message && (
-                        <img w="20px" src={ getImgUrl('/assets/send.svg') } />
+                        <img className='send-btn' w="20px" src={IMAGES.send} />
                     )}
                     <p style={{ fontSize: '11px' }}>Bu proyekt Fuad Sadıqov və İlkin Rəfiyev tərəfindən Kriptoqrafiya fənni üçün hazırlanmışdır</p>
                 </form>
