@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import CryptoJS from 'crypto-js';
 import './App.css'
-import IMAGES from './IMAGES'
+import IMAGES from './Images/Images'
 
 function App() {
     const [message, setMessage] = useState('');
