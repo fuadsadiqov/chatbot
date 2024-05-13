@@ -87,7 +87,7 @@ function App() {
                     <input className='input' placeholder='Axtar...' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
                     {message && (
-                        <img className='send-btn' w="20px" src={IMAGES.send} />
+                        <img onClick={sendMessage} className='send-btn' w="20px" src={IMAGES.send} />
                     )}
                     <p style={{ fontSize: '11px' }}>Bu proyekt Fuad Sadıqov və İlkin Rəfiyev tərəfindən Kriptoqrafiya fənni üçün hazırlanmışdır</p>
                 </form>
