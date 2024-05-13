@@ -74,7 +74,7 @@ function App() {
                                 </div>
                                 <div className='response'>
                                     <div className='response-avatar'>
-                                        <img src={IMAGES.send}/>
+                                        <img src={IMAGES.sefa}/>
                                     </div>
                                     {result.response != null ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response  }} /> : <div className='load-avatar'></div>}
                                 </div>
