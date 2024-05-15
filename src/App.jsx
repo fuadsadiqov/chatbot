@@ -64,7 +64,7 @@ function App() {
         <div className="App">
             <div className='container'>
                 <div className="result">
-                    {!results.length && <div className='hello'>Salam əziz həmkarım. Nə lazımdır?</div>}
+                    {!results.length && <div className='hello'>Salam əziz həmkarım</div>}
                     {results.length > 0 ? results.map((result, index) => (
                         <div key={index}>
                             <div className='mes'>
@@ -74,7 +74,7 @@ function App() {
                                 </div>
                                 <div className='response'>
                                     <div className='response-avatar'>
-                                        <img src={IMAGES.sefa}/>
+                                        <img src="https://www.spartand.dk/wp-content/uploads/2018/05/cropped-YHlk56g.jpg"/>
                                     </div>
                                     {result.response != null ? <div className='result-text' dangerouslySetInnerHTML={{ __html: result.response  }} /> : <div className='load-avatar'></div>}
                                 </div>
@@ -84,7 +84,7 @@ function App() {
                     <div ref={resultsEndRef} />
                 </div>
                 <form onSubmit={sendMessage} className='form'>
-                    <input className='input' placeholder='Axtar...' value={message}
+                    <input className='input' style={{color: "#FFFFFF"}} placeholder='Axtar...' value={message}
                         onChange={(e) => setMessage(e.target.value)} />
                     {message && (
                         <img onClick={sendMessage} className='send-btn' w="20px" src={IMAGES.send} />
